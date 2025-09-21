@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP视频解析 - 免费观看各大平台VIP视频</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 移动端适配样式 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .platform-badges {
+                flex-wrap: wrap;
+            }
+            .platform-badge {
+                margin: 5px;
+            }
+            .api-selector {
+                flex-direction: column;
+            }
+            .api-btn {
+                margin: 5px 0;
+                width: 100%;
+            }
+            .download-section {
+                padding: 20px 10px;
+            }
+        }
+        .download-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        .download-btn i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <header class="text-center py-5 fade-in">
+                <h1 class="hero-title">VIP视频解析</h1>
+                <p class="hero-subtitle">一站式解析各大视频平台VIP内容</p>
+                <div class="platform-badges">
+                    <span class="platform-badge"><i class="fab fa-youtube"></i> 腾讯视频</span>
+                    <span class="platform-badge"><i class="fas fa-tv"></i> 爱奇艺</span>
+                    <span class="platform-badge"><i class="fas fa-play-circle"></i> 优酷</span>
+                    <span class="platform-badge"><i class="fas fa-film"></i> 芒果TV</span>
+                    <span class="platform-badge"><i class="fas fa-video"></i> 搜狐视频</span>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <!-- 下载区域 -->
+            <div class="download-section text-center">
+                <h2 class="mb-4"><i class="fas fa-download"></i> 下载应用</h2>
+                <p class="mb-4">获取更好的使用体验，下载我们的应用程序</p>
+                <div class="download-buttons">
+                    <a href="../dist/VIP视频解析工具安装包.zip" class="download-btn">
+                        <i class="fab fa-windows"></i> Windows版下载
+                    </a>
+                    <a href="#" class="download-btn" id="webAppBtn">
+                        <i class="fas fa-globe"></i> 使用网页版
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-section" id="webApp" style="display: none;">
+                <div class="card glass-card mb-4 fade-in">
+                    <div class="card-body p-4">
+                        <h3 class="section-title"><i class="fas fa-link"></i> 输入视频链接</h3>
+                        <div class="url-input-group">
+                            <input type="text" id="videoUrl" class="form-control" placeholder="请输入需要解析的视频链接...">
+                            <button class="parse-btn pulse" id="parseBtn"><i class="fas fa-bolt"></i> 立即解析</button>
+                        </div>
+                        <div class="api-selector-container">
+                            <p class="api-label">选择解析接口：</p>
+                            <div class="api-selector" id="apiSelector">
+                                <button type="button" class="api-btn active" data-api="api1">接口 1 <span class="api-speed">综合</span></button>
+                                <button type="button" class="api-btn" data-api="api2">接口 2 <span class="api-speed">稳定</span></button>
+                                <button type="button" class="api-btn" data-api="api3">接口 3 <span class="api-speed">高清</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-section" id="playerSection" style="display: none;">
+                <div class="player-container" id="playerContainer">
+                    <div class="player-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-play-circle placeholder-icon"></i>
+                            <h3 class="placeholder-title">等待视频加载</h3>
+                            <p class="placeholder-text">输入视频链接并点击"立即解析"按钮开始播放</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions-section">
+                <div class="card glass-card mb-4">
+                    <div class="card-header">
+                        <h3 class="section-title"><i class="fas fa-info-circle"></i> 使用指南</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="steps-container">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>复制视频链接</h4>
+                                    <p>从各大视频网站复制您想要观看的VIP视频链接</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>粘贴到输入框</h4>
+                                    <p>将复制的链接粘贴到上方的输入框中</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>选择解析接口</h4>
+                                    <p>根据需要选择合适的解析接口（默认接口1）</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>点击解析按钮</h4>
+                                    <p>点击"立即解析"按钮开始解析视频</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>VIP视频解析工具</h4>
+                    <p>本工具仅供学习交流使用，请勿用于商业用途</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2025 VIP视频解析工具 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 网页版按钮点击事件
+            document.getElementById('webAppBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('webApp').style.display = 'block';
+                document.getElementById('playerSection').style.display = 'block';
+                // 滚动到应用区域
+                document.getElementById('webApp').scrollIntoView({behavior: 'smooth'});
+            });
+
+            // API选择器
+            const apiButtons = document.querySelectorAll('.api-btn');
+            apiButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    apiButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // 解析按钮点击事件
+            document.getElementById('parseBtn').addEventListener('click', function() {
+                const videoUrl = document.getElementById('videoUrl').value.trim();
+                if (!videoUrl) {
+                    alert('请输入视频链接');
+                    return;
+                }
+
+                const activeApi = document.querySelector('.api-btn.active').getAttribute('data-api');
+                let apiUrl;
+                
+                switch(activeApi) {
+                    case 'api1':
+                        apiUrl = 'https://jx.jsonplayer.com/player/?url=';
+                        break;
+                    case 'api2':
+                        apiUrl = 'https://jx.aidouer.net/?url=';
+                        break;
+                    case 'api3':
+                        apiUrl = 'https://jx.m3u8.tv/jiexi/?url=';
+                        break;
+                    default:
+                        apiUrl = 'https://jx.jsonplayer.com/player/?url=';
+                }
+
+                const playerContainer = document.getElementById('playerContainer');
+                playerContainer.innerHTML = `<iframe src="${apiUrl}${encodeURIComponent(videoUrl)}" frameborder="0" allowfullscreen style="width:100%;height:100%;"></iframe>`;
+            });
+        });
+    </script>
+</body>
+</html>
