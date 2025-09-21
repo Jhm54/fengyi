@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="60" ry="60" fill="url(#grad1)"/>
+  <circle cx="256" cy="256" r="160" fill="#ecf0f1"/>
+  <polygon points="210,180 330,256 210,332" fill="#e74c3c"/>
+  <path d="M256,80 C157.63,80 78,159.63 78,258 C78,356.37 157.63,436 256,436 C354.37,436 434,356.37 434,258 C434,159.63 354.37,80 256,80 Z M256,120 C332.15,120 394,181.85 394,258 C394,334.15 332.15,396 256,396 C179.85,396 118,334.15 118,258 C118,181.85 179.85,120 256,120 Z" fill="#2c3e50"/>
+  <text x="256" y="460" font-family="Arial" font-size="32" text-anchor="middle" fill="white">VIP视频解析</text>
+</svg>

@@ -1,0 +1,190 @@
+/* 全局过渡效果 */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--animation-order, 0) * 0.1s);
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+    }
+    
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+    }
+    
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* 浮动效果 */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* 闪光按钮效果 */
+@keyframes shine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.shine-effect {
+    background: linear-gradient(90deg, 
+        var(--gradient-start) 0%, 
+        var(--gradient-end) 50%, 
+        var(--gradient-start) 100%);
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+}
+
+/* API选择器动画 */
+.api-selector-container {
+    position: relative;
+}
+
+.api-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.api-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+}
+
+.api-btn:hover::after {
+    transform: translateX(0);
+    transition: transform 0.4s ease;
+}
+
+/* 步骤项目动画 */
+.step-item {
+    transition: transform 0.3s ease;
+}
+
+.step-item:hover {
+    transform: translateX(5px);
+}
+
+.step-number {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-item:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* 移动端响应式优化 */
+@media (max-width: 992px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .platform-badges {
+        flex-wrap: wrap;
+    }
+    
+    .url-input-group {
+        flex-direction: column;
+    }
+    
+    .url-input-group input {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .url-input-group button {
+        width: 100%;
+    }
+    
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .badge {
+        font-size: 0.7rem;
+        margin-bottom: 5px;
+    }
+    
+    .mt-3.d-flex {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group input, 
+    .input-group button {
+        width: 100%;
+        border-radius: 30px !important;
+        margin-bottom: 10px;
+    }
+    
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 5px;
+    }
+}
